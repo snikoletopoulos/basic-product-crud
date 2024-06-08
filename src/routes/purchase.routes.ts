@@ -1,7 +1,9 @@
 import { Router } from "express";
 
-import { test } from "controllers/product.controllers.js";
+import { getPurchase, getPurchases } from "controllers/purchase/index.js";
 
 export const purchaseRouter = Router();
 
-purchaseRouter.get("/", test);
+purchaseRouter.get("/", getPurchases);
+
+purchaseRouter.get("/:id", getPurchase);
