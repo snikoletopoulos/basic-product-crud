@@ -13,6 +13,14 @@ export const getPurchase: RequestHandler = async (req, res, next) => {
 	try {
 		purchase = await db.purchase.findUnique({
 			where: { id: result.params.id },
+			include: {
+				productItems: {
+					select: {
+						amount: true,
+						product: true,
+					},
+				},
+			},
 		});
 	} catch (error) {
 		return next(error);
