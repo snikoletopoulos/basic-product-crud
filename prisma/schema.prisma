@@ -11,10 +11,12 @@ datasource db {
 }
 
 model Product {
-  id        String     @id @default(uuid())
-  name      String     @unique
+  id        String         @id @default(uuid())
+  name      String         @unique
   price     Float
-  purchases Purchase[]
+  purchases PurchaseItem[]
+
+  @@map("products")
 }
 
 model Customer {
@@ -23,12 +25,26 @@ model Customer {
   email     String     @unique
   address   String
   purchases Purchase[]
+
+  @@map("customers")
 }
 
 model Purchase {
-  id         String   @id @default(uuid())
+  id           String         @id @default(uuid())
+  customerId   String
+  productItems PurchaseItem[]
+  customer     Customer       @relation(fields: [customerId], references: [id])
+
+  @@map("purchases")
+}
+
+model PurchaseItem {
   productId  String
-  customerId String
   product    Product  @relation(fields: [productId], references: [id])
-  customer   Customer @relation(fields: [customerId], references: [id])
+  purchaseId String
+  purchase   Purchase @relation(fields: [purchaseId], references: [id])
+  amount     Int
+
+  @@id([productId, purchaseId])
+  @@map("purchase_items")
 }
