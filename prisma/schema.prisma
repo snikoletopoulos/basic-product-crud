@@ -10,27 +10,19 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id       String   @id @default(uuid())
-  name     String?
-  products Product[]
-}
-
 model Product {
-  id       String   @id @default(uuid())
-  name     String
-  price    Float
-  user     User     @relation(fields: [userId], references: [id])
-  userId   String
-  purchases   Purchase[]
+  id        String     @id @default(uuid())
+  name      String     @unique
+  price     Float
+  purchases Purchase[]
 }
 
 model Customer {
-  id       String   @id @default(uuid())
-  name     String
-  email    String
-  address  String
-  purchases   Purchase[]
+  id        String     @id @default(uuid())
+  name      String
+  email     String     @unique
+  address   String
+  purchases Purchase[]
 }
 
 model Purchase {
