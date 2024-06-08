@@ -25,4 +25,6 @@ export const getPurchase: RequestHandler = async (req, res, next) => {
 	return res.json(purchase);
 };
 
-const GetPurchaseParams = z.object({ id: z.string() });
+const GetPurchaseParams = z.object({
+	id: z.string({ message: "ID is required" }),
+});

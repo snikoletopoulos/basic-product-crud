@@ -21,7 +21,7 @@ export const deleteCustomer: RequestHandler = async (req, res, next) => {
 
 const DeleteCustomerParams = z.object({
 	id: z
-		.string()
+		.string({ message: "ID is required" })
 		.refine(
 			async id => db.customer.findUnique({ where: { id } }),
 			"Customer not found"

@@ -19,11 +19,13 @@ export const createProduct: RequestHandler = async (req, res, next) => {
 
 const CreateProductBody = z.object({
 	name: z
-		.string()
+		.string({ message: "Name is required" })
 		.min(1, "Name must be at least 1 character long")
 		.refine(
 			async name => !(await db.product.findUnique({ where: { name } })),
 			"Product already exists"
 		),
-	price: z.number().min(0, "Price must be greater than or equal to 0"),
+	price: z
+		.number({ message: "Price is required" })
+		.min(0, "Price must be greater than or equal to 0"),
 });

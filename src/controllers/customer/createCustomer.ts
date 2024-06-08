@@ -18,13 +18,17 @@ export const createCustomer: RequestHandler = async (req, res, next) => {
 };
 
 const CreateCustomerBody = z.object({
-	name: z.string().min(1, "Name must be at least 1 character long"),
+	name: z
+		.string({ message: "Name is required" })
+		.min(1, "Name must be at least 1 character long"),
 	email: z
-		.string()
+		.string({ message: "Email is required" })
 		.email("Invalid email")
 		.refine(
 			async email => !(await db.customer.findUnique({ where: { email } })),
 			"Customer already exists"
 		),
-	address: z.string().min(1, "Address must be at least 1 character long"),
+	address: z
+		.string({ message: "Address is required" })
+		.min(1, "Address must be at least 1 character long"),
 });

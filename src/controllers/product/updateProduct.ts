@@ -25,7 +25,7 @@ export const updateProduct: RequestHandler = async (req, res, next) => {
 
 const UpdateProductParams = z.object({
 	id: z
-		.string()
+		.string({ message: "ID is required" })
 		.refine(
 			async id => db.product.findUnique({ where: { id } }),
 			"Product not found"
