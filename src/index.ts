@@ -5,14 +5,15 @@ import express from "express";
 import { db } from "libs/db.js";
 import { errorMiddleware } from "middlewares/error.middleware.js";
 import { get404 } from "controllers/error.js";
+import { productRouter } from "routes/product.routes.js";
+import { customerRouter } from "routes/customer.routes.js";
 
 const app = express();
 
 app.use(express.json());
 
-app.use(productRouter);
-app.use(productRouter);
-app.use(productRouter);
+app.use("/customer", customerRouter);
+app.use("/product", productRouter);
 
 app.use(get404);
 app.use(errorMiddleware);
