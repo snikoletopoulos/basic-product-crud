@@ -9,6 +9,7 @@
 		"format": "prettier --write src",
 		"lint:ts": "tsc --noEmit",
 		"lint:eslint": "eslint src",
+		"lint": "npm run lint:eslint; npm run lint:ts",
 		"prepare": "husky"
 	},
 	"author": "",
