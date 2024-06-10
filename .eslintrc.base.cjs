@@ -1,11 +1,5 @@
-/** @type {import("eslint").Linter.Config} */
 module.exports = {
-	extends: [
-		"eslint:recommended",
-		"plugin:import/recommended",
-		"turbo",
-		"prettier",
-	],
+	extends: ["plugin:import/recommended", "prettier"],
 	parserOptions: {
 		ecmaVersion: "latest",
 	},
@@ -34,4 +28,3 @@ module.exports = {
 	reportUnusedDisableDirectives: true,
 	ignorePatterns: ["node_modules"],
 };
-

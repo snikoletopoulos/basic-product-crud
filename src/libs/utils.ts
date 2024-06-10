@@ -11,7 +11,7 @@ export const validateParams = async <T extends z.ZodTypeAny>(
 	schema: T
 ): Promise<ParamsValidationResult<z.infer<T>>> => {
 	try {
-		const params = await schema.parseAsync(req.params);
+		const params = (await schema.parseAsync(req.params)) as z.infer<T>;
 		return { success: true, params };
 	} catch (error) {
 		if (!(error instanceof z.ZodError)) {
@@ -37,7 +37,7 @@ export const validateBody = async <T extends z.ZodTypeAny>(
 	schema: T
 ): Promise<BodyValidationResult<z.infer<T>>> => {
 	try {
-		const body = await schema.parseAsync(req.body);
+		const body = (await schema.parseAsync(req.body)) as z.infer<T>;
 		return { success: true, body };
 	} catch (error) {
 		if (!(error instanceof z.ZodError)) {

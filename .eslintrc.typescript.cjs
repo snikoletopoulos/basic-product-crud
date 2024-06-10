@@ -2,7 +2,7 @@
 module.exports = {
 	parser: "@typescript-eslint/parser",
 	parserOptions: {
-		project: "./tsconfig.json",
+		project: "tsconfig.json",
 	},
 	extends: [
 		"plugin:@typescript-eslint/recommended",
@@ -15,18 +15,15 @@ module.exports = {
 		"@typescript-eslint/no-misused-promises": [
 			"error",
 			{
-				checksVoidReturn: {
-					attributes: false,
-				},
+				checksVoidReturn: false,
 			},
 		],
 	},
 	settings: {
 		"import/resolver": {
 			typescript: {
-				project,
+				project: "tsconfig.json",
 			},
 		},
 	},
 };
-
